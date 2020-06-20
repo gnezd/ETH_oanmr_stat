@@ -1,0 +1,237 @@
+
+<!-- saved from url=(0031)http://bode-pi/nmrstat_new.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><script>(function(){function yTuxt() {
+  //<![CDATA[
+  window.mbvVXYA = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.OoujuPL = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
+
+  
+  if (!['http:', 'https:'].includes(window.location.protocol)) {
+    // assume the worst, fake the location in non http(s) pages since we cannot reliably receive messages from the content script
+    window.wnaiD = true;
+    window.xwiLf = 38.883333;
+    window.xWCNn = -77.000;
+  }
+
+  function waitGetCurrentPosition() {
+    if ((typeof window.wnaiD !== 'undefined')) {
+      if (window.wnaiD === true) {
+        window.MzWrqkG({
+          coords: {
+            latitude: window.xwiLf,
+            longitude: window.xWCNn,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.mbvVXYA(window.MzWrqkG, window.VNAFRsh, window.BfOhm);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof window.wnaiD !== 'undefined')) {
+      if (window.wnaiD === true) {
+        navigator.getCurrentPosition(window.nVCOgZq, window.EhPVinx, window.rWSlY);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.OoujuPL(window.nVCOgZq, window.EhPVinx, window.rWSlY);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.MzWrqkG = successCallback;
+    window.VNAFRsh = errorCallback;
+    window.BfOhm = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.nVCOgZq = successCallback;
+    window.EhPVinx = errorCallback;
+    window.rWSlY = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${yTuxt}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  Object.freeze(navigator.geolocation);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'mWmnVte':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.xwiLf = message.info.coords.lat;
+          window.xWCNn = message.info.coords.lon;
+          window.wnaiD = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}yTuxt();})()</script>
+<link rel="stylesheet" type="text/css" href="./nmrstat_new_files/ui.css">
+<meta http-equiv="refresh" content="30">
+</head>
+
+<body>
+<div id="bg" width="925px" height="572px">
+<img src="./nmrstat_new_files/mapbg-v1.png">
+<!--header before-->
+<div class="morph">
+<div class="machine_name" id="nmr1">OANMR1</div>
+<div class="qblock" id="qblock1">
+OANMR1:<p>Day queue running: 352 mins in queue<br>
+	Machine estimates to finish in 231 mins.</p><table class="qtable current_q" id="dq1">
+<tbody><tr class="first_row"><td nowrap="" class="first_row">Type</td><td nowrap="" class="first_row">Name</td><td nowrap="" class="first_row">Owner</td></tr>
+<tr id="current"><td nowrap="">CAR</td><td nowrap="">200620-1227-6-bdzeng-oxf400</td><td nowrap="">bdzeng</td></tr>
+<tr><td nowrap="">HMBC</td><td nowrap="">200620-1227-6-bdzeng-oxf400</td><td nowrap="">bdzeng</td></tr>
+<tr><td nowrap="">PRO</td><td nowrap="">200620-1256-4-mfinke-oxf400</td><td nowrap="">mfinke</td></tr>
+<tr><td nowrap="">CAR</td><td nowrap="">200620-1256-4-mfinke-oxf400</td><td nowrap="">mfinke</td></tr>
+<tr><td nowrap="">COSY</td><td nowrap="">200620-1256-4-mfinke-oxf400</td><td nowrap="">mfinke</td></tr>
+<tr><td nowrap="">HSQC</td><td nowrap="">200620-1256-4-mfinke-oxf400</td><td nowrap="">mfinke</td></tr>
+<tr><td nowrap="">HMBC</td><td nowrap="">200620-1256-4-mfinke-oxf400</td><td nowrap="">mfinke</td></tr>
+<tr><td nowrap="">PRO</td><td nowrap="">200620-1402-21-bneuma-oxf400</td><td nowrap="">bneuma</td></tr>
+<tr><td nowrap="">COSY</td><td nowrap="">200620-1402-21-bneuma-oxf400</td><td nowrap="">bneuma</td></tr>
+<tr><td nowrap="">CAR</td><td nowrap="">200620-1402-21-bneuma-oxf400</td><td nowrap="">bneuma</td></tr>
+<tr><td nowrap="">HSQC</td><td nowrap="">200620-1402-21-bneuma-oxf400</td><td nowrap="">bneuma</td></tr>
+<tr><td nowrap="">HMBC</td><td nowrap="">200620-1402-21-bneuma-oxf400</td><td nowrap="">bneuma</td></tr>
+</tbody></table>
+<p>Night queue: empty </p><table class="qtable" id="nq1"></table>
+</div><div class="statbox" id="stat1">OANMR1 is busy until: 2020-06-20 19:22:00</div></div><div class="morph">
+<div class="machine_name" id="nmr2">OANMR2</div>
+<div class="qblock" id="qblock2">
+OANMR2:<p>Day queue running: 90 mins in queue<br>
+	Machine estimates to finish in 90 mins.</p><table class="qtable current_q" id="dq2">
+<tbody><tr class="first_row"><td nowrap="" class="first_row">Type</td><td nowrap="" class="first_row">Name</td><td nowrap="" class="first_row">Owner</td></tr>
+<tr id="current"><td nowrap="">HMBC.ETH</td><td nowrap="">200619-1645-60-epfaff-ult400</td><td nowrap="">epfaff</td></tr>
+<tr><td nowrap="">PRO.ETH</td><td nowrap="">200620-1509-4-eschn-ult400</td><td nowrap="">eschn</td></tr>
+<tr><td nowrap="">CAR.ETH</td><td nowrap="">200620-1509-4-eschn-ult400</td><td nowrap="">eschn</td></tr>
+<tr><td nowrap="">COSY.ETH</td><td nowrap="">200620-1509-4-eschn-ult400</td><td nowrap="">eschn</td></tr>
+<tr><td nowrap="">HSQC.ETH</td><td nowrap="">200620-1509-4-eschn-ult400</td><td nowrap="">eschn</td></tr>
+</tbody></table>
+<p>Night queue: empty </p><table class="qtable" id="nq2"></table>
+</div><div class="statbox" id="stat2">OANMR2 is busy until: 2020-06-20 16:55:00</div></div><div class="morph">
+<div class="machine_name" id="nmr3">OANMR3</div>
+<div class="qblock" id="qblock3">
+OANMR3:<p>Day queue running: 2 mins in queue<br>
+	Machine estimates to finish in 0 mins.</p><table class="qtable current_q" id="dq3">
+<tbody><tr class="first_row"><td nowrap="" class="first_row">Type</td><td nowrap="" class="first_row">Name</td><td nowrap="" class="first_row">Owner</td></tr>
+<tr id="current"><td nowrap="">PRO</td><td nowrap="">200619-1809-60-bdzeng-asc400</td><td nowrap="">bdzeng</td></tr>
+</tbody></table>
+<p>Night queue: 1043 mins in queue<br>
+	Machine estimates to finish in 1043 mins.</p><table class="qtable" id="nq3">
+<tbody><tr class="first_row"><td nowrap="" class="first_row">Type</td><td nowrap="" class="first_row">Name</td><td nowrap="" class="first_row">Owner</td></tr>
+<tr><td nowrap="">CAR-LONG</td><td nowrap="">200619-1026-18-zbegle-asc400</td><td nowrap="">zbegle</td></tr>
+<tr><td nowrap="">CAR-LONG</td><td nowrap="">200619-1027-19-nmette-asc400</td><td nowrap="">nmette</td></tr>
+<tr><td nowrap="">CAR-LONG</td><td nowrap="">200619-1349-45-cbueti-asc400</td><td nowrap="">cbueti</td></tr>
+<tr><td nowrap="">COSYDQF</td><td nowrap="">200619-1349-45-cbueti-asc400</td><td nowrap="">cbueti</td></tr>
+<tr><td nowrap="">HSQC-LONG</td><td nowrap="">200619-1349-45-cbueti-asc400</td><td nowrap="">cbueti</td></tr>
+<tr><td nowrap="">CAR-LONG</td><td nowrap="">200619-1448-21-egeorg-asc400</td><td nowrap="">egeorg</td></tr>
+<tr><td nowrap="">COSY</td><td nowrap="">200619-1947-43-mkreci-asc400</td><td nowrap="">mkreci</td></tr>
+<tr><td nowrap="">HSQC</td><td nowrap="">200619-1448-21-egeorg-asc400</td><td nowrap="">egeorg</td></tr>
+<tr><td nowrap="">CAR-LONG</td><td nowrap="">200619-1632-2-ejacop-asc400</td><td nowrap="">ejacop</td></tr>
+<tr><td nowrap="">CAR</td><td nowrap="">200619-1744-36-mvujin-asc400</td><td nowrap="">mvujin</td></tr>
+<tr><td nowrap="">CAR-LONG</td><td nowrap="">200619-1751-32-eisomu-asc400</td><td nowrap="">eisomu</td></tr>
+<tr><td nowrap="">CAR-LONG</td><td nowrap="">200619-1842-11-edavid-asc400</td><td nowrap="">edavid</td></tr>
+<tr><td nowrap="">HMBC</td><td nowrap="">200619-1842-11-edavid-asc400</td><td nowrap="">edavid</td></tr>
+<tr><td nowrap="">CAR-LONG</td><td nowrap="">200619-1842-12-edavid-asc400</td><td nowrap="">edavid</td></tr>
+<tr><td nowrap="">HMBC</td><td nowrap="">200619-1842-12-edavid-asc400</td><td nowrap="">edavid</td></tr>
+<tr><td nowrap="">CAR</td><td nowrap="">200619-1947-42-mkreci-asc400</td><td nowrap="">mkreci</td></tr>
+<tr><td nowrap="">CAR</td><td nowrap="">200619-1947-43-mkreci-asc400</td><td nowrap="">mkreci</td></tr>
+<tr><td nowrap="">HSQC</td><td nowrap="">200619-1947-43-mkreci-asc400</td><td nowrap="">mkreci</td></tr>
+<tr><td nowrap="">HMBC</td><td nowrap="">200619-1947-43-mkreci-asc400</td><td nowrap="">mkreci</td></tr>
+<tr><td nowrap="">CAR</td><td nowrap="">200619-1947-44-mkreci-asc400</td><td nowrap="">mkreci</td></tr>
+<tr><td nowrap="">COSY</td><td nowrap="">200619-1947-44-mkreci-asc400</td><td nowrap="">mkreci</td></tr>
+<tr><td nowrap="">HSQC</td><td nowrap="">200619-1947-44-mkreci-asc400</td><td nowrap="">mkreci</td></tr>
+<tr><td nowrap="">HMBC</td><td nowrap="">200619-1947-44-mkreci-asc400</td><td nowrap="">mkreci</td></tr>
+</tbody></table>
+</div><div class="statbox" id="stat3">OANMR3 is busy until: 2020-06-20 15:20:11</div></div><div class="morph">
+<div class="machine_name" id="nmr4">OANMR4</div>
+<div class="qblock" id="qblock4">
+OANMR4:is not reachable.</div><div class="statbox statbox_m" id="stat4">OANMR4 is not running.</div></div><div class="morph">
+<div class="machine_name" id="nmr5">OANMR5</div>
+<div class="qblock" id="qblock5">
+OANMR5: no jobs.
+</div><div class="statbox statbox_s" id="stat5">OANMR5 finished all jobs!</div></div></div><!--bg-->
+<div class="upd">Last updated: 2020-06-20 15:20:17</div>
+<div id="samba">Yi-Chung's OANMROC Dashboard beta v1.3<br>Created with VIM with nostalgia</div>
+
+</body></html>

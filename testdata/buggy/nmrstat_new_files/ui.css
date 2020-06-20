@@ -1,0 +1,185 @@
+body {
+	background-color: #333;
+	color: #fff;
+	font-family: monospace;
+	font-size: 20px;
+}
+
+table {
+	border-collapse: collapse;
+	font-size: 10px;
+}
+td {
+	padding: 2px;
+}
+
+p {
+	font-size: 12px;
+}
+
+#bg {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	width: 1400px;
+}
+
+.statbox {
+	position: absolute;
+	background-color: #000;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 16px;
+}
+
+.statbox_s {
+	border: white solid 2px;
+	font-weight: bold;
+}
+
+.statbox_m {
+	background-color: #2a2a2a;
+	border: none;
+	color: #444;
+}
+
+#stat1 {
+	left: 960px;
+	top: 10px;
+}
+
+#stat2 {
+	left: 960px;
+	top: 50px;
+}
+
+#stat3 {
+	left: 960px;
+	top: 90px;
+}
+
+#stat4 {
+	left: 960px;
+	top: 130px;
+}
+
+#stat5 {
+	left: 960px;
+	top: 170px;
+}
+
+.current_q {
+	background-color: #222;
+}
+
+.qblock {
+	position: absolute;
+	background-color: #000;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 14px;
+	width: 300px;
+}
+
+#qblock1 {
+	left: 0px;
+	top: 600px;
+}
+
+
+#qblock2 {
+	left: 320px;
+	top: 600px;
+}
+
+#qblock3 {
+	left: 640px;
+	top: 600px;
+}
+#qblock4 {
+	left: 960px;
+	top: 600px;
+}
+
+#qblock5 {
+	left: 1280px;
+	top: 600px;
+}
+
+
+.machine_name{
+	position: absolute;
+	padding: 5px;
+	background-color: #999;
+	border-radius: 5px;
+	border: 2px solid #fff;
+}
+
+#nmr1 {
+	left: 827px;
+	top: 510px;
+}
+
+#nmr2 {
+	left: 40px;
+	top: 140px;
+}
+
+#nmr3 {
+	left: 25px;
+	top: 200px;
+}
+
+#nmr4 {
+	left: 650px;
+	top: 520px;
+}
+
+#nmr5 {
+	left: 565px;
+	top: 520px;
+}
+
+.first_row {
+	border-bottom: 1px solid white;
+}
+
+#current {
+	background-color: white;
+	color: black;
+}
+
+.morph:hover * {
+	background-color:white;
+	color:black;
+}
+
+.morph:hover .first_row {
+	border-bottom: 1px solid black;
+}
+
+.morph:hover .current_q {
+	background-color:#eee;
+}
+
+.machine_name:hover+.qtable {
+	background-color:white;
+	color:black;
+}
+
+.upd {
+	position: absolute;
+	background-color: #333;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 16px;
+	left: 960px;
+	top: 250px;
+}
+
+#samba {
+	font-size: 16px;
+       	position: absolute;
+       	top: 50px;
+       	left : 225px;
+}
