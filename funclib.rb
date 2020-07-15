@@ -357,7 +357,9 @@ begin
 
 	end
 rescue
-	stat = -1
+	stat = [-1, 0, 0, 0]
+	current_and_q = Array.new
+	history = Array.new
 end
 	return stat, current_and_q, history #simplify the current version: just get the stats
 

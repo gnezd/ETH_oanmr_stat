@@ -16,6 +16,7 @@ output = <<-EOHeader
 EOHeader
 
 qt_log='/var/www/html/qtlog'
+slab1_path="/slab1"
 qt_out = File.open('qt_log', "a+")
 qt_out.write(Time.now)
 
@@ -28,7 +29,7 @@ data = Array.new
 <div class=\"qblock\" id=\"qblock#{num}\">
 OANMR#{num}:"
 	puts data[num][0][0]
-	if data[num][0][0] != -1#if nothing goes wrong with retrieve
+	if data[num][0][0] != -1 && data[num][1][1] != nil #if nothing goes wrong with retrieve
 if data[num][0][2]+data[num][0][3] == 0 # if no jobs at all
 	output += " no jobs.\n"
 else	
@@ -100,6 +101,7 @@ output += "</div>"
 
 if data[num][0][0] == 1
 	if  data[num][0][2] + data[num][0][3] != 0
+		puts "data[num][0] is #{data[num][0]}"
 		output += "<div class=\"statbox\" id =\"stat#{num}\">OANMR#{num} is busy until: #{data[num][0][1].strftime("%Y-%m-%d %H:%M:%S")}</div>"
 	else
 		output += "<div class=\"statbox statbox_s\" id =\"stat#{num}\">OANMR#{num} finished all jobs!</div>" #statbox_s for STRONG
@@ -121,11 +123,16 @@ output += "</div><!--bg-->
 </body>"
 
 outpath='/var/www/html/nmrstat_new.html'
-htmlextout = File.open('/home/pi/slab1/homepage/nmrstat_new.html', "w")
 htmlout = File.open(outpath, "w")
-htmlextout.puts output
 htmlout.puts output
 qt_out.write("\n")
 qt_out.close
+=begin
+	htmlextout = File.open("#{slab1_path}/homepage/nmrstat_new.html", "w")
+	htmlextout.puts output
+	htmlextout.close
+rescue
+	puts "cannot open slab1!"
 
 
+=end

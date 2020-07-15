@@ -3,6 +3,7 @@
 while true; do
 	ruby nmrstat_html.rb
 	ruby main.rb
+#	scp -B -i /home/ydzeng/slab1 /var/www/html/nmrstat_new.html dzengy@slab1vrt:~/homepage/nmrstat_new.html
 #	cp ui.css /Volumes/dzengy/homepage/
 	cp ui.css /var/www/html/
 #	cp /private/var/log/apache2/access_log /Volumes/dzengy/homepage/mbplog
