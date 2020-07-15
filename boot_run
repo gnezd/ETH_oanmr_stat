@@ -1,0 +1,11 @@
+#!/bin/bash
+#Place in /etc/init.d and symbolically linke to /etc/rc5.d to run under init5
+
+#go to maschine status script directory and run them
+cd #absolute path to htmlout.sh 
+./htmlout > /dev/null 2>/dev/null &
+echo $! >nmrstat.pid
+
+#status code 0 for a succesful exit
+exit 0
+

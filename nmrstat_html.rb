@@ -71,6 +71,7 @@ end
 end
 #-----MAIN------
 #data3 = retrieve('oanmr3oc')
+slab1_path="/slab1"
 output = String.new #here starts a very ugly buffer-output approach
 			#will be rewritten to do both STDIO and html dump at the same time using a single function
 
@@ -99,9 +100,9 @@ output << "<p>Last updated:#{Time.now}</p>\n"
 output << "</font></body>\n"
 
 outpath='/var/www/html/nmrstat.html'
-htmlextout = File.open('/home/pi/slab1/homepage/nmrstat.html', "w")
+#htmlextout = File.open("#{slab1_path}/homepage/nmrstat.html", "w")
 htmlout = File.open(outpath, "w")
-htmlextout.puts output
+#htmlextout.puts output
 htmlout.puts output
 puts output
-
+htmlout.close
