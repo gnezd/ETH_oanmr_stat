@@ -1,7 +1,7 @@
 require './funclib.rb'
 
 #-----MAIN------
-
+$debug = 0
 
 output = <<-EOHeader
 <head>
@@ -22,13 +22,13 @@ qt_out.write(Time.now)
 
 data = Array.new
 (1..5).each do |num|
-	puts "machine oanmr#{num}"
+	puts "machine oanmr#{num}" if $debug == 1
 	data[num] = retrieve("oanmr#{num}oc")
 	output += "<div class =\"morph\">\n"
 	output+="<div class=\"machine_name\" id=\"nmr#{num}\">OANMR#{num}</div>
 <div class=\"qblock\" id=\"qblock#{num}\">
 OANMR#{num}:"
-	puts data[num][0][0]
+	puts data[num][0][0] if $debug == 1
 	if data[num][0][0] != -1 && data[num][1][1] != nil #if nothing goes wrong with retrieve
 if data[num][0][2]+data[num][0][3] == 0 # if no jobs at all
 	output += " no jobs.\n"
@@ -84,24 +84,24 @@ end #if nq
 end #if any jobs at all
 		#puts "my own dq and nq length in min: #{(dql/60).to_i}, #{(nql/60).to_i}"
 		begin #histories
-		puts "history entries for machine #{num}: #{data[num][2].length}"
+		puts "history entries for machine #{num}: #{data[num][2].length}" if $debug == 1
 		hist_upd_return = hist_tsv_update("oanmr#{num}_hist", data[num][2]) #ARGMT
-		puts "new history entries: #{hist_upd_return[1]} of them"
-		rescue => exception
-		puts "sth wrong with history on oanmr#{num}"
-		puts exception
+		puts "new history entries: #{hist_upd_return[1]} of them" if $debug == 1
+		rescue Exception => exception
+			puts "sth wrong with history on oanmr#{num}: #{exception.message}"
+		#bla = `echo \'OANMR#{num} history error at #{Time.now}\'`
 		end
 	else
-		puts "is not reachable."
+		puts "is not reachable." if $debug == 1
 		output += "is not reachable."
 
 	end # if reachable
-	puts "===="
+	puts "====" if $debug == 1
 output += "</div>"
 
 if data[num][0][0] == 1
 	if  data[num][0][2] + data[num][0][3] != 0
-		puts "data[num][0] is #{data[num][0]}"
+		puts "data[num][0] is #{data[num][0]}" if $debug == 1
 		output += "<div class=\"statbox\" id =\"stat#{num}\">OANMR#{num} is busy until: #{data[num][0][1].strftime("%Y-%m-%d %H:%M:%S")}</div>"
 	else
 		output += "<div class=\"statbox statbox_s\" id =\"stat#{num}\">OANMR#{num} finished all jobs!</div>" #statbox_s for STRONG

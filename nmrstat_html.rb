@@ -1,6 +1,7 @@
 require 'net/http'
 require 'uri'
 
+$debug = 0
 def login(machine_name, debug = nil)
 	u=URI('http://'+machine_name+'.ethz.ch:8015/template-login.html') #aim login page
 	req=Net::HTTP::Get.new(u.path)
@@ -83,7 +84,7 @@ output << "\n"
 
 data = Array.new
 (1..5).each do |num|
-	puts num
+	puts num if $debug == 1
 	if num == 100 
 		output << "<p><b>oanmr3oc: Skipped for now</b><br>"
 		
@@ -104,5 +105,5 @@ outpath='/var/www/html/nmrstat.html'
 htmlout = File.open(outpath, "w")
 #htmlextout.puts output
 htmlout.puts output
-puts output
+puts output if $debug == 1
 htmlout.close

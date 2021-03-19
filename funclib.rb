@@ -138,7 +138,7 @@ def cnq(holdertable, num = nil, debug = nil)
 		end
 #----
 	if dq == nil
-		puts "dqnil"
+		puts "dqnil" if debug == 1
 	else
 		#puts "dqsorting"
 		dq.sort! {|a,b| a[9] <=> b[9]}
@@ -183,17 +183,18 @@ def typ_adj(hist_line)
 end
 
 def hist_tsv_parse(tsvln)
-	line_parsed = typ_adj(tsvln.split(/(?:^')|(?:'\t')|(?:'\t$)/).drop(1))
+	line_parsed = typ_adj(tsvln.scrub.split(/(?:^')|(?:'\t')|(?:'\t$)/).drop(1))
 	return line_parsed
 end
 
 def hist_tsv_form(hist_form)
 	output = String.new
 	hist_form.each do |col|
-		output << "'#{col}'\t"
+		output << "'#{col}'\t".scrub
+		#puts col.to_s.force_encoding "UTF-8"
 	end
 	output << "\n"
-	return output
+	return output.force_encoding "UTF-8"
 end
 
 def hist_html_parse(html, v_oder_f = nil)
@@ -247,14 +248,14 @@ def hist_tsv_update(filename, parsed, debug = nil)
 	last_hist = Array.new
 	tsvlines = Array.new
 	orig = String.new
-	tsv = File.open(filename, "a+", "r:ISO-8859-1:UTF-8")
+	tsv = File.open(filename, "a+")
 	tsvlines = tsv.readlines
 	if tsvlines.length != 0
 		puts "tsvarch read, having #{tsvlines.length} lines" if debug == 1
-		last_hist = hist_tsv_parse(tsvlines[0])
+		last_hist = hist_tsv_parse(tsvlines[0].scrub)
 		puts "last entry: #{last_hist[2]} at #{last_hist[0]}" if debug == 1
 		tsvlines.each do |ln|
-			orig << ln
+			orig << ln.scrub
 		end
 	else
 		puts "empty file, set time at 1990" if debug == 1
@@ -270,7 +271,7 @@ def hist_tsv_update(filename, parsed, debug = nil)
 	end
 	puts "new entries: #{newer_meas.length}" if debug == 1
 	newer_meas.each do |meas|
-		output << hist_tsv_form(meas)
+			output << hist_tsv_form(meas)
 	end
 	if output != ''
 		puts "some new output, close tsv and open to write" if debug == 1
@@ -334,8 +335,8 @@ begin
 	#history_store = File.open("NMR_stat_htmls/#{machine_name}/history.html", "w")
 	#stat_store = File.open("NMR_stat_htmls/#{machine_name}/stat.html", "w")
 	#holdertable_store = File.open("NMR_stat_htmls/#{machine_name}/holdertable.html", "w")
-	debug = 1
-	sock, session = login(machine_name, debug)	
+	#debug = 1
+	sock, session = login(machine_name)	
 	#stat	
 	puts "socket made" if debug == 1
 	stat_html = get_page(sock, session, '/template-status.htm')
