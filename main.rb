@@ -90,7 +90,6 @@ end #if any jobs at all
 		rescue => exception
 		puts "sth wrong with history on oanmr#{num}"
 		puts exception
-		bla = `echo \'OANMR#{num} history error at #{Time.now}\'`
 		end
 	else
 		puts "is not reachable."
