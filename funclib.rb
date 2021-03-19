@@ -138,7 +138,7 @@ def cnq(holdertable, num = nil, debug = nil)
 		end
 #----
 	if dq == nil
-		puts "dqnil"
+		puts "dqnil" if debug == 1
 	else
 		#puts "dqsorting"
 		dq.sort! {|a,b| a[9] <=> b[9]}
@@ -334,7 +334,7 @@ begin
 	#history_store = File.open("NMR_stat_htmls/#{machine_name}/history.html", "w")
 	#stat_store = File.open("NMR_stat_htmls/#{machine_name}/stat.html", "w")
 	#holdertable_store = File.open("NMR_stat_htmls/#{machine_name}/holdertable.html", "w")
-	debug = 1
+	#debug = 1
 	sock, session = login(machine_name)	
 	#stat	
 	puts "socket made" if debug == 1

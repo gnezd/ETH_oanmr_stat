@@ -8,6 +8,6 @@ while true; do
 	cp ui.css /var/www/html/
 #	cp /private/var/log/apache2/access_log /Volumes/dzengy/homepage/mbplog
 #	cp oanmr*_hist /home/pi/slab1/homepage/
-	echo 'sleep for 30s'
+#	echo 'sleep for 30s'
 	sleep 30s
 done
