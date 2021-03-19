@@ -247,7 +247,7 @@ def hist_tsv_update(filename, parsed, debug = nil)
 	last_hist = Array.new
 	tsvlines = Array.new
 	orig = String.new
-	tsv = File.open(filename, "a+")
+	tsv = File.open(filename, "a+", "r:ISO-8859-1:UTF-8")
 	tsvlines = tsv.readlines
 	if tsvlines.length != 0
 		puts "tsvarch read, having #{tsvlines.length} lines" if debug == 1
