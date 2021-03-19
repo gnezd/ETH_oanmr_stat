@@ -87,8 +87,9 @@ end #if any jobs at all
 		puts "history entries for machine #{num}: #{data[num][2].length}"
 		hist_upd_return = hist_tsv_update("oanmr#{num}_hist", data[num][2]) #ARGMT
 		puts "new history entries: #{hist_upd_return[1]} of them"
-		rescue
+		rescue => exception
 		puts "sth wrong with history on oanmr#{num}"
+		puts exception
 		bla = `echo \'OANMR#{num} history error at #{Time.now}\'`
 		end
 	else

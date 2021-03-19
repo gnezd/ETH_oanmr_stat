@@ -335,7 +335,7 @@ begin
 	#stat_store = File.open("NMR_stat_htmls/#{machine_name}/stat.html", "w")
 	#holdertable_store = File.open("NMR_stat_htmls/#{machine_name}/holdertable.html", "w")
 	debug = 1
-	sock, session = login(machine_name)	
+	sock, session = login(machine_name, debug)	
 	#stat	
 	puts "socket made" if debug == 1
 	stat_html = get_page(sock, session, '/template-status.htm')
