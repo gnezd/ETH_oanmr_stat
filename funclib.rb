@@ -183,17 +183,18 @@ def typ_adj(hist_line)
 end
 
 def hist_tsv_parse(tsvln)
-	line_parsed = typ_adj(tsvln.split(/(?:^')|(?:'\t')|(?:'\t$)/).drop(1))
+	line_parsed = typ_adj(tsvln.scrub.split(/(?:^')|(?:'\t')|(?:'\t$)/).drop(1))
 	return line_parsed
 end
 
 def hist_tsv_form(hist_form)
 	output = String.new
 	hist_form.each do |col|
-		output << "'#{col}'\t"
+		output << "'#{col}'\t".scrub
+		#puts col.to_s.force_encoding "UTF-8"
 	end
 	output << "\n"
-	return output
+	return output.force_encoding "UTF-8"
 end
 
 def hist_html_parse(html, v_oder_f = nil)
@@ -251,10 +252,10 @@ def hist_tsv_update(filename, parsed, debug = nil)
 	tsvlines = tsv.readlines
 	if tsvlines.length != 0
 		puts "tsvarch read, having #{tsvlines.length} lines" if debug == 1
-		last_hist = hist_tsv_parse(tsvlines[0])
+		last_hist = hist_tsv_parse(tsvlines[0].scrub)
 		puts "last entry: #{last_hist[2]} at #{last_hist[0]}" if debug == 1
 		tsvlines.each do |ln|
-			orig << ln
+			orig << ln.scrub
 		end
 	else
 		puts "empty file, set time at 1990" if debug == 1
@@ -270,7 +271,7 @@ def hist_tsv_update(filename, parsed, debug = nil)
 	end
 	puts "new entries: #{newer_meas.length}" if debug == 1
 	newer_meas.each do |meas|
-		output << hist_tsv_form(meas)
+			output << hist_tsv_form(meas)
 	end
 	if output != ''
 		puts "some new output, close tsv and open to write" if debug == 1

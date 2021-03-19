@@ -87,9 +87,9 @@ end #if any jobs at all
 		puts "history entries for machine #{num}: #{data[num][2].length}" if $debug == 1
 		hist_upd_return = hist_tsv_update("oanmr#{num}_hist", data[num][2]) #ARGMT
 		puts "new history entries: #{hist_upd_return[1]} of them" if $debug == 1
-		rescue
-		puts "sth wrong with history on oanmr#{num}"
-		bla = `echo \'OANMR#{num} history error at #{Time.now}\'`
+		rescue Exception => exception
+			puts "sth wrong with history on oanmr#{num}: #{exception.message}"
+		#bla = `echo \'OANMR#{num} history error at #{Time.now}\'`
 		end
 	else
 		puts "is not reachable." if $debug == 1
